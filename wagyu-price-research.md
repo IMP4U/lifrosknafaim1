@@ -70,6 +70,27 @@ Generic A5 Japanese Wagyu ribeye (non-branded retail benchmark, 2025):
 ~¥25,900 / kg. Branded A5 Hida sirloin sits roughly 1.5× that mark; yakiniku
 slices sit well below it.
 
+### Yakiniku-cut focus (Zabuton, Misuji, Karubi, Harami, Rib Roast)
+
+Prices for the specific cuts most often featured in Japanese yakiniku guides,
+all A5 (5等級) Hida unless noted, at Takayama / Hida-region butchers.
+
+| Cut                          | Japanese            | Form            | Per 100 g       | Per kg            |
+|------------------------------|---------------------|-----------------|-----------------|-------------------|
+| Zabuton (Chuck Flap)         | ザブトン             | Yakiniku slices | ¥1,404 (Maruaki) | ¥14,040          |
+| Misuji (Top Blade)           | ミスジ               | Yakiniku slices (rare) | ~¥1,500–2,500 | ¥15,000–25,000 |
+| Misuji (Top Blade)           | ミスジ               | Portioned steak | ~¥4,980          | ~¥49,800         |
+| Karubi (Short Rib) — premium | 上カルビ             | Yakiniku slices | ¥972 (Maruaki)   | ¥9,720           |
+| Karubi — special select      | 特選カルビ (A5/A4)   | Yakiniku slices | ¥1,000–1,300     | ¥10,000–13,000   |
+| Karubi — nakaochi trim       | 中落カルビ切落し       | Trim slices     | ¥518 (Takumiya)  | ¥5,180           |
+| Harami (Skirt Steak)*        | ハラミ               | Offal-class      | ¥600–1,200       | ¥6,000–12,000    |
+| Rib Roast / Ribeye — offcuts | リブロース 焼肉切落し  | Yakiniku slices | ¥1,080 (Maruaki) | ¥10,800          |
+| Rib Roast / Ribeye — block   | リブロースステーキ     | Steak block      | ¥4,000–4,500     | ¥40,000–45,000   |
+
+\* Harami is the diaphragm, classed as offal (内臓), so it is not graded
+on the JMGA A1–A5 scale the way muscle cuts are. "Hida wagyu harami" simply
+means harami from Hida-branded cattle.
+
 ### Where to save vs. splurge
 
 - **Cheapest take-home**: Maruaki butcher counter (thin slices ~¥250/100g),
@@ -83,6 +104,13 @@ slices sit well below it.
 
 ## Sources
 
+- [Maruaki — A5 焼肉用ザブトン 1kg (¥1,404/100g)](https://www.hidagyu-maruaki.co.jp/hidashop/products/detail/24)
+- [Takumiya — 5等級 中落カルビ切落し (¥518/100g)](https://nikunotakumiya.jp/item/869)
+- [Takumiya — 5等級 すき焼切落し (¥734/100g)](https://nikunotakumiya.jp/item/881)
+- [Satou Honten — 飛騨牛A5/A4 特選カルビ 100g](https://www.takayamasatou.com/shopdetail/000000001296/)
+- [Satou Honten — 飛騨牛A5/A4 カルビ 100g](https://www.takayamasatou.com/shopdetail/000000001299/)
+- [Wagyu-celeb — 飛騨牛 焼肉ザブトン & モモ 100g](https://wagyugift.jp/products/detail/694)
+- [Mitakeya — 飛騨牛 4等級5等級 catalog](https://mitakeya.com/?mode=grp&gid=2637204)
 - [Maruaki online shop — 5等級飛騨牛 (A5 catalog with 100g prices)](https://www.hidagyu-maruaki.co.jp/hidashop/products/list?category_id=32)
 - [Maruaki direct shop full catalog](https://www.hidagyu-maruaki.co.jp/directshop/products/list?category_id=1)
 - [Tohta Seiniku Honten (藤太精肉本店) — A5 sirloin](https://www.hidagyu-tohta.com/products/list?category_id=36)

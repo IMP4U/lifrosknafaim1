@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מפת האתר – לפרוש כנפיים | Visual Explainer</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap');
+
+        :root {
+            --primary-color: #0077b6;
+            --secondary-color: #00b4d8;
+            --accent-color: #ffc300;
+            --dark-color: #2c3e50;
+            --light-color: #ffffff;
+            --gray-color: #f8f9fa;
+            --text-color: #34495e;
+            --radius: 14px;
+            --shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: linear-gradient(160deg, #eef6fb 0%, #f8f9fa 100%);
+            padding: 2.5rem 1rem 4rem;
+        }
+
+        .wrap { max-width: 1180px; margin: auto; }
+
+        /* --- Header --- */
+        .doc-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .doc-header .kite { font-size: 3rem; }
+        .doc-header h1 {
+            font-size: 2.6rem;
+            font-weight: 900;
+            color: var(--dark-color);
+            margin: .3rem 0;
+        }
+        .doc-header .sub {
+            color: var(--primary-color);
+            font-weight: 500;
+            font-size: 1.15rem;
+        }
+        .doc-header .tag {
+            display: inline-block;
+            margin-top: .8rem;
+            background: var(--dark-color);
+            color: #fff;
+            font-size: .8rem;
+            letter-spacing: .5px;
+            padding: .35rem 1rem;
+            border-radius: 999px;
+        }
+
+        /* --- Flow / journey --- */
+        .flow { display: flex; flex-direction: column; align-items: stretch; gap: 0; }
+
+        .stage {
+            background: var(--light-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            border-inline-start: 6px solid var(--secondary-color);
+            padding: 1.6rem 1.8rem;
+            position: relative;
+        }
+        .stage .num {
+            position: absolute;
+            inset-inline-start: -18px;
+            top: 1.4rem;
+            width: 40px; height: 40px;
+            background: var(--primary-color);
+            color: #fff;
+            border-radius: 50%;
+            display: grid; place-items: center;
+            font-weight: 900;
+            box-shadow: var(--shadow);
+        }
+        .stage h2 {
+            font-size: 1.45rem;
+            color: var(--dark-color);
+            display: flex; align-items: center; gap: .6rem;
+            margin-bottom: .2rem;
+        }
+        .stage .sec-id {
+            font-family: monospace;
+            direction: ltr;
+            font-size: .8rem;
+            color: var(--secondary-color);
+            background: #e8f6fb;
+            padding: .1rem .5rem;
+            border-radius: 6px;
+        }
+        .stage .lead { color: var(--text-color); font-size: 1.02rem; }
+
+        .connector {
+            align-self: center;
+            width: 3px; height: 34px;
+            background: repeating-linear-gradient(to bottom, var(--secondary-color) 0 6px, transparent 6px 12px);
+        }
+        .connector::after {
+            content: '▼';
+            display: block;
+            color: var(--secondary-color);
+            text-align: center;
+            margin-top: -2px;
+            font-size: .8rem;
+        }
+
+        /* --- generic cards grid --- */
+        .grid { display: grid; gap: 1rem; margin-top: 1.2rem; }
+        .g-2 { grid-template-columns: repeat(2, 1fr); }
+        .g-3 { grid-template-columns: repeat(3, 1fr); }
+        .g-4 { grid-template-columns: repeat(4, 1fr); }
+
+        .card {
+            background: var(--gray-color);
+            border: 1px solid #e9eef2;
+            border-radius: 10px;
+            padding: 1rem;
+        }
+        .card .ico { font-size: 1.5rem; display: block; margin-bottom: .35rem; }
+        .card h4 { font-size: 1rem; color: var(--dark-color); margin-bottom: .25rem; }
+        .card p { font-size: .85rem; color: #5a6b7b; }
+
+        /* --- tracks (age groups) --- */
+        .track {
+            border-radius: 12px;
+            padding: 1rem;
+            color: #fff;
+        }
+        .track h3 { font-size: 1.1rem; margin-bottom: .1rem; }
+        .track .age { font-size: .78rem; opacity: .9; }
+        .track .acts { margin-top: .7rem; display: flex; flex-direction: column; gap: .45rem; }
+        .track .act {
+            background: rgba(255,255,255,.16);
+            border-radius: 8px;
+            padding: .4rem .55rem;
+            font-size: .82rem;
+            backdrop-filter: blur(2px);
+        }
+        .track .act b { display: block; font-weight: 700; }
+
+        .t1 { background: linear-gradient(150deg, #0077b6, #0096c7); }
+        .t2 { background: linear-gradient(150deg, #0096c7, #00b4d8); }
+        .t3 { background: linear-gradient(150deg, #2c3e50, #34607a); }
+        .t4 { background: linear-gradient(150deg, #d39e00, #ffc300); color: #2c3e50; }
+        .t4 .act { background: rgba(44,62,80,.12); }
+
+        /* --- CTA stage --- */
+        .cta-stage {
+            text-align: center;
+            border-inline-start-color: var(--accent-color);
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: #fff;
+        }
+        .cta-stage h2 { color: #fff; justify-content: center; }
+        .cta-stage .lead { color: rgba(255,255,255,.92); }
+        .pill {
+            display: inline-block;
+            margin-top: 1rem;
+            background: var(--accent-color);
+            color: var(--dark-color);
+            font-weight: 700;
+            padding: .7rem 1.6rem;
+            border-radius: 999px;
+        }
+
+        .audience-row { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1rem; }
+        .chip {
+            background: #e8f6fb;
+            color: var(--primary-color);
+            border: 1px solid #cdeaf4;
+            border-radius: 999px;
+            padding: .3rem .9rem;
+            font-size: .85rem;
+            font-weight: 500;
+        }
+
+        footer.legend {
+            margin-top: 3rem;
+            text-align: center;
+            color: #8a99a8;
+            font-size: .85rem;
+        }
+
+        @media (max-width: 820px) {
+            .g-2, .g-3, .g-4 { grid-template-columns: 1fr; }
+            .stage .num { inset-inline-start: 10px; top: -18px; }
+            body { padding-inline: .5rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="wrap">
+
+    <div class="doc-header">
+        <div class="kite">🪁</div>
+        <h1>לפרוש כנפיים</h1>
+        <div class="sub">מפת מסע הגולש באתר – הסבר חזותי למבנה ולתוכן</div>
+        <span class="tag">VISUAL EXPLAINER · מבנה דף הנחיתה</span>
+    </div>
+
+    <div class="flow">
+
+        <!-- 0: Navbar -->
+        <section class="stage">
+            <div class="num">›</div>
+            <h2>🧭 ניווט עליון <span class="sec-id">.navbar</span></h2>
+            <p class="lead">סרגל קבוע שמלווה את הגולש לאורך כל הדף ומקצר את הדרך לכל מקטע ולהרשמה.</p>
+            <div class="audience-row">
+                <span class="chip">עלינו</span>
+                <span class="chip">למה אנחנו?</span>
+                <span class="chip">פעילויות</span>
+                <span class="chip">שירותים נוספים</span>
+                <span class="chip">הרשמה ✦</span>
+            </div>
+        </section>
+
+        <div class="connector"></div>
+
+        <!-- 1: Hero -->
+        <section class="stage">
+            <div class="num">1</div>
+            <h2>🚀 פתיח (Hero) <span class="sec-id">#home</span></h2>
+            <p class="lead">המסר המרכזי: <b>"פעילויות זום יצירתיות לילדים ובני נוער"</b> – שילוב של סקרנות, חדשנות ובינה מלאכותית. כפתור ההרשמה מופיע כבר כאן, כדי לתפוס גולשים שכבר משוכנעים.</p>
+        </section>
+
+        <div class="connector"></div>
+
+        <!-- 2: About -->
+        <section class="stage">
+            <div class="num">2</div>
+            <h2>💙 עלינו והחזון <span class="sec-id">#about</span></h2>
+            <p class="lead">בונה אמון: יוזמה חינוכית בהובלת <b>נועה סינגר</b>, עם מערך ארצי של מדריכים, מפתחים ומנהלי קהילות.</p>
+            <div class="grid g-2">
+                <div class="card">
+                    <span class="ico">🌱</span>
+                    <h4>היוזמה</h4>
+                    <p>מערך ארצי של תכניות חינוך פורצות דרך, מתוך שנים של עשייה בשטח.</p>
+                </div>
+                <div class="card">
+                    <span class="ico">🎯</span>
+                    <h4>החזון</h4>
+                    <p>לאפשר לכל ילד/ה לזהות את הכוחות הייחודיים שלהם ולהשתמש בטכנולוגיה וביצירתיות כדי להשפיע.</p>
+                </div>
+            </div>
+        </section>
+
+        <div class="connector"></div>
+
+        <!-- 3: Benefits -->
+        <section class="stage">
+            <div class="num">3</div>
+            <h2>✨ למה כדאי? – ערך משולש <span class="sec-id">#benefits</span></h2>
+            <p class="lead">חמש הסיבות שמדברות אל מקבלי ההחלטה (לרוב מעסיק/ארגון): ערך לילדים, להורים ולארגון כולו.</p>
+            <div class="grid g-3">
+                <div class="card"><span class="ico">❤️</span><h4>תמיכה אמיתית בהורים</h4><p>פתרון איכותי ובטוח בשעות הרגישות – שקט נפשי וריכוז.</p></div>
+                <div class="card"><span class="ico">💡</span><h4>חוויה עם ערך</h4><p>תכנים חינוכיים וכיפיים המשלבים AI ויצירה.</p></div>
+                <div class="card"><span class="ico">👥</span><h4>בניית קהילה</h4><p>שייכות וחיבור בין ילדי העובדים לחברה.</p></div>
+                <div class="card"><span class="ico">🤝</span><h4>מחוברות עובדים</h4><p>עובדים מרגישים מוערכים → גאווה ונאמנות.</p></div>
+                <div class="card"><span class="ico">🚀</span><h4>השקעה קטנה, אימפקט גדול</h4><p>פעילות זמינה ופשוטה עם השפעה מיידית.</p></div>
+            </div>
+        </section>
+
+        <div class="connector"></div>
+
+        <!-- 4: Activities -->
+        <section class="stage">
+            <div class="num">4</div>
+            <h2>🎨 תכניות הפעילות – 4 מסלולים לפי גיל <span class="sec-id">#activities</span></h2>
+            <p class="lead">לב הדף: ממשק טאבים שמתאים את התוכן לכל שכבת גיל. נגיש גם מהטלפון, ובכל מסלול 3 פעילויות מבוססות AI.</p>
+            <div class="grid g-4">
+                <div class="track t1">
+                    <h3>מסלול א'</h3><span class="age">כיתות א'–ג'</span>
+                    <div class="acts">
+                        <div class="act"><b>🎁 מה יש בקופסה?</b>המצאה סודית לשעת חירום.</div>
+                        <div class="act"><b>🤖 AI, תפתיע אותי!</b>סיפורים לתמונות שה-AI יצר.</div>
+                        <div class="act"><b>🤸 תנועה חכמה עם AI</b>פקודות תנועה מצחיקות.</div>
+                    </div>
+                </div>
+                <div class="track t2">
+                    <h3>מסלול ב'</h3><span class="age">כיתות ד'–ו'</span>
+                    <div class="acts">
+                        <div class="act"><b>🎯 AI ממציא אתגר</b>פתרונות יצירתיים לאתגר.</div>
+                        <div class="act"><b>🖼️ תחרות תמונה משוגעת</b>הצבעה לתמונת AI מנצחת.</div>
+                        <div class="act"><b>🦸 בונים גיבור-על</b>שם, כוח, מראה וחיסרון.</div>
+                    </div>
+                </div>
+                <div class="track t3">
+                    <h3>מסלול ג'</h3><span class="age">כיתות ז'–ט'</span>
+                    <div class="acts">
+                        <div class="act"><b>🎙️ AI מראיין אותי</b>שאלות אישיות בצ'אט.</div>
+                        <div class="act"><b>⏱️ מיזם ב-20 דקות</b>סטארט-אפ עם שם וסלוגן.</div>
+                        <div class="act"><b>🎭 דמות על גבול הדמיון</b>בניית דמות לסיפור.</div>
+                    </div>
+                </div>
+                <div class="track t4">
+                    <h3>מסלול ד'</h3><span class="age">כיתות י'–י"ב</span>
+                    <div class="acts">
+                        <div class="act"><b>🎬 תסריט טיקטוק ב-60 שניות</b>תסריט קצר עם AI.</div>
+                        <div class="act"><b>🧭 חוזקות ועתיד</b>ראיון אישי לגילוי עצמי.</div>
+                        <div class="act"><b>🧠 AI נגד סטריאוטיפים</b>ניתוח ודיון ביקורתי.</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="connector"></div>
+
+        <!-- 5: Services -->
+        <section class="stage">
+            <div class="num">5</div>
+            <h2>🏫 שירותים נוספים <span class="sec-id">#services</span></h2>
+            <p class="lead">הרחבה מעבר לזום – פנייה לבתי ספר ורשויות, להגדלת היקף ההתקשרות.</p>
+            <div class="grid g-4">
+                <div class="card"><span class="ico">🎓</span><h4>יזמות ובינה מלאכותית</h4><p>תכניות שנתיות לכיתות ד' ומעלה.</p></div>
+                <div class="card"><span class="ico">🛠️</span><h4>הכשרות STEAM ו-AI</h4><p>סדנאות לתלמידים ולאנשי חינוך.</p></div>
+                <div class="card"><span class="ico">🚀</span><h4>ייעוץ והטמעת חדשנות</h4><p>ליווי פדגוגי וטכנולוגי.</p></div>
+                <div class="card"><span class="ico">🏘️</span><h4>הקמת קהילות חינוכיות</h4><p>קהילות ילדים, הורים ואנשי חינוך.</p></div>
+            </div>
+        </section>
+
+        <div class="connector"></div>
+
+        <!-- 6: CTA -->
+        <section class="stage cta-stage">
+            <div class="num">★</div>
+            <h2>🎯 קריאה לפעולה <span class="sec-id">#cta</span></h2>
+            <p class="lead">נקודת ההמרה. כל המסע מנותב לכאן: כפתור יחיד המוביל לטופס Google להרשמה ולקבלת פרטים.</p>
+            <span class="pill">📝 הרשמה לפעילות → טופס Google</span>
+        </section>
+
+    </div>
+
+    <footer class="legend">
+        מבנה הדף: ניווט → פתיח → אמון → ערך → פעילויות → הרחבה → המרה.&nbsp;
+        כל החיצים (▼) מייצגים את זרימת הגלילה של הגולש לעבר ההרשמה.
+        <br>נוצר כהסבר חזותי למקור <code dir="ltr">code (30).html</code>.
+    </footer>
+
+</div>
+</body>
+</html>

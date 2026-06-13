@@ -2,7 +2,10 @@
 <html lang="he" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#6c5ce7">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>עדכון למשימות — אביב ✨</title>
 <style>
   :root{
@@ -19,13 +22,15 @@
   }
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0;}
+  html{-webkit-text-size-adjust:100%;}
   body{
     font-family:"Segoe UI",Rubik,Arial,Helvetica,sans-serif;
     background:linear-gradient(160deg,#f4f1fb 0%,#eef6ff 100%);
     color:var(--ink);
     line-height:1.6;
-    padding:22px 14px 80px;
+    padding:max(22px,env(safe-area-inset-top)) 14px calc(80px + env(safe-area-inset-bottom));
     -webkit-font-smoothing:antialiased;
+    -webkit-tap-highlight-color:transparent;
   }
   .wrap{max-width:760px;margin:0 auto;}
 
@@ -219,6 +224,42 @@
 
   /* focus mode dims non-active tasks */
   body.focus .task:not(.active){opacity:.35;filter:grayscale(.3);}
+
+  /* ===== Smartphone friendly ===== */
+  @media (max-width:600px){
+    body{padding:max(14px,env(safe-area-inset-top)) 10px calc(40px + env(safe-area-inset-bottom));}
+    header h1{font-size:30px;}
+    header p{font-size:16px;}
+
+    .progress-wrap{padding:14px;border-radius:16px;top:6px;}
+    .progress-top{font-size:15px;}
+    .progress-pct{font-size:22px;}
+
+    .task{padding:16px 14px;border-radius:18px;}
+    .task-head{gap:10px;}
+    .num{width:38px;height:38px;font-size:18px;}
+    .task-title{font-size:18px;}
+
+    .field{padding:12px;}
+    .field .text{font-size:16px;}
+    .field ul{padding-inline-start:18px;}
+
+    /* bigger, easy-to-tap checkbox row */
+    .check-row{padding:16px 14px;gap:14px;}
+    .check-row input{width:30px;height:30px;}
+    .check-row label{font-size:17px;}
+
+    /* stack buttons full-width so they're easy to tap with a thumb */
+    .controls{display:flex;flex-direction:column;gap:10px;margin-top:22px;}
+    .btn{width:100%;margin:0;padding:16px;font-size:17px;}
+
+    footer{font-size:13px;margin-top:24px;}
+  }
+
+  /* respect users who prefer reduced motion */
+  @media (prefers-reduced-motion:reduce){
+    *{transition:none !important;scroll-behavior:auto !important;}
+  }
 
   @media print{
     body{background:#fff;padding:0;}

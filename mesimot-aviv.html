@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>עדכון למשימות — אביב ✨</title>
+<style>
+  :root{
+    --bg:#f4f1fb;
+    --card:#ffffff;
+    --ink:#2b2745;
+    --muted:#6b6789;
+    --accent1:#6c5ce7;
+    --accent2:#00b894;
+    --accent3:#e17055;
+    --ring:#e9e4f7;
+    --done:#d7f5e3;
+    --shadow:0 10px 30px rgba(108,92,231,.12);
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:"Segoe UI",Rubik,Arial,Helvetica,sans-serif;
+    background:linear-gradient(160deg,#f4f1fb 0%,#eef6ff 100%);
+    color:var(--ink);
+    line-height:1.6;
+    padding:22px 14px 80px;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:760px;margin:0 auto;}
+
+  /* Header */
+  header{
+    text-align:center;
+    margin-bottom:18px;
+  }
+  header h1{
+    font-size:clamp(26px,6vw,40px);
+    margin:0 0 6px;
+    letter-spacing:.5px;
+  }
+  header p{
+    margin:0;
+    color:var(--muted);
+    font-size:17px;
+  }
+
+  /* Progress */
+  .progress-wrap{
+    background:var(--card);
+    border-radius:18px;
+    padding:16px 18px;
+    box-shadow:var(--shadow);
+    margin:18px 0 26px;
+    position:sticky;
+    top:10px;
+    z-index:5;
+    border:1px solid var(--ring);
+  }
+  .progress-top{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:10px;
+    font-weight:700;
+  }
+  .progress-pct{color:var(--accent1);font-size:20px;}
+  .bar{
+    height:14px;
+    background:var(--ring);
+    border-radius:99px;
+    overflow:hidden;
+  }
+  .bar-fill{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,var(--accent1),var(--accent2));
+    border-radius:99px;
+    transition:width .4s ease;
+  }
+  .cheer{
+    text-align:center;
+    margin-top:10px;
+    font-size:15px;
+    color:var(--accent2);
+    font-weight:700;
+    min-height:20px;
+  }
+
+  /* Task cards */
+  .task{
+    background:var(--card);
+    border-radius:20px;
+    padding:20px 20px 18px;
+    margin-bottom:20px;
+    box-shadow:var(--shadow);
+    border:2px solid var(--ring);
+    border-inline-start:8px solid var(--accent1);
+    transition:transform .15s ease, opacity .3s ease, border-color .3s ease;
+  }
+  .task.t1{border-inline-start-color:var(--accent1);}
+  .task.t2{border-inline-start-color:var(--accent2);}
+  .task.t3{border-inline-start-color:var(--accent3);}
+  .task.done{opacity:.65;background:var(--done);}
+  .task.done .task-title{text-decoration:line-through;}
+
+  .task-head{
+    display:flex;
+    align-items:flex-start;
+    gap:12px;
+    margin-bottom:14px;
+  }
+  .num{
+    flex:0 0 auto;
+    width:42px;height:42px;
+    border-radius:50%;
+    display:grid;place-items:center;
+    font-size:20px;font-weight:800;
+    color:#fff;
+  }
+  .t1 .num{background:var(--accent1);}
+  .t2 .num{background:var(--accent2);}
+  .t3 .num{background:var(--accent3);}
+  .task-title{
+    font-size:19px;
+    font-weight:800;
+    margin:6px 0 0;
+  }
+
+  .field{
+    border-radius:14px;
+    padding:12px 14px;
+    margin:10px 0;
+    background:#faf9ff;
+    border:1px solid var(--ring);
+  }
+  .field .label{
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    font-weight:800;
+    font-size:14px;
+    padding:2px 10px;
+    border-radius:99px;
+    margin-bottom:6px;
+  }
+  .label.goal{background:#efe9ff;color:var(--accent1);}
+  .label.what{background:#e3f8ee;color:#0a8f6d;}
+  .label.when{background:#fdeee7;color:#c0512f;}
+  .field .text{font-size:16px;}
+  .field ul{margin:8px 0 0;padding-inline-start:20px;}
+  .field li{margin:4px 0;}
+  .when-pill{
+    display:inline-block;
+    background:#fff;
+    border:2px dashed var(--accent3);
+    color:#c0512f;
+    font-weight:800;
+    padding:4px 14px;
+    border-radius:99px;
+    font-size:15px;
+  }
+
+  /* checkbox row */
+  .check-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-top:16px;
+    padding:12px 14px;
+    border-radius:14px;
+    background:#f4f1fb;
+    cursor:pointer;
+    user-select:none;
+    border:2px solid transparent;
+    transition:background .2s ease,border-color .2s ease;
+  }
+  .check-row:hover{border-color:var(--accent1);}
+  .check-row input{
+    width:26px;height:26px;
+    accent-color:var(--accent2);
+    cursor:pointer;
+    flex:0 0 auto;
+  }
+  .check-row label{
+    font-weight:800;
+    font-size:16px;
+    cursor:pointer;
+  }
+
+  /* buttons */
+  .controls{
+    text-align:center;
+    margin-top:26px;
+  }
+  .btn{
+    background:var(--accent1);
+    color:#fff;
+    border:none;
+    padding:12px 22px;
+    border-radius:99px;
+    font-size:15px;
+    font-weight:700;
+    cursor:pointer;
+    margin:6px;
+    box-shadow:var(--shadow);
+    transition:transform .12s ease,opacity .2s ease;
+  }
+  .btn.ghost{background:#fff;color:var(--accent1);border:2px solid var(--accent1);box-shadow:none;}
+  .btn:hover{transform:translateY(-2px);}
+  .btn:active{transform:translateY(0);}
+
+  footer{
+    text-align:center;
+    color:var(--muted);
+    font-size:13px;
+    margin-top:30px;
+  }
+
+  /* focus mode dims non-active tasks */
+  body.focus .task:not(.active){opacity:.35;filter:grayscale(.3);}
+
+  @media print{
+    body{background:#fff;padding:0;}
+    .progress-wrap,.controls,.check-row{box-shadow:none;}
+    .task{box-shadow:none;page-break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <h1>📋 עדכון למשימות</h1>
+    <p>משימות קטנות ופרקטיות לאביב — צעד אחד בכל פעם 💜</p>
+  </header>
+
+  <!-- Progress -->
+  <div class="progress-wrap">
+    <div class="progress-top">
+      <span>ההתקדמות שלי</span>
+      <span class="progress-pct" id="pct">0%</span>
+    </div>
+    <div class="bar"><div class="bar-fill" id="barFill"></div></div>
+    <div class="cheer" id="cheer">בוא נתחיל — בחר משימה אחת והתמקד בה 🚀</div>
+  </div>
+
+  <!-- TASK 1 -->
+  <section class="task t1" data-task="1">
+    <div class="task-head">
+      <div class="num">1</div>
+      <div>
+        <div class="task-title">לשווק את "אביב" שתדליק ילדים והורים על קורסי הזום</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="label goal">🎯 מטרה</span>
+      <div class="text">למצוא דרך לשווק את המושלמות בשם "אביב" שתדליק ילדים והורים על קורסי הזום.</div>
+    </div>
+
+    <div class="field">
+      <span class="label what">🛠️ מה לעשות</span>
+      <div class="text">
+        <ul>
+          <li>להחליט על השיטה שאנחנו רוצים (לדוגמה: סרטונים קצרים, שיעור לדוגמה, חידון פיתוי וכו').</li>
+          <li>להבין מה זה ידרוש לעשות בגדול (לדוגמה: מחקרים דרושים, בניית אתר, הקלטה ועריכה וכו').</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="label when">⏰ למתי</span>
+      <div class="text"><span class="when-pill">לפגישה עם שרלי</span></div>
+    </div>
+
+    <div class="check-row" onclick="toggle(event,1)">
+      <input type="checkbox" id="c1">
+      <label for="c1">סיימתי את המשימה הזו ✅</label>
+    </div>
+  </section>
+
+  <!-- TASK 2 -->
+  <section class="task t2" data-task="2">
+    <div class="task-head">
+      <div class="num">2</div>
+      <div>
+        <div class="task-title">הכנה לפגישה עם שרלי + לאשר את התכנית</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="label goal">🎯 מטרה</span>
+      <div class="text">הכנה לפגישה עם שרלי + לוודא שאביב מסכים עם התכנית ששרלי בנתה.</div>
+    </div>
+
+    <div class="field">
+      <span class="label what">🛠️ מה לעשות</span>
+      <div class="text">
+        <ul>
+          <li>לעבור על תכנית העבודה ששרלי בנתה (ותשלח עד הבוקר).</li>
+          <li>לתקן כל דבר שלא מסתדר לך.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="label when">⏰ למתי</span>
+      <div class="text"><span class="when-pill">לפגישה עם שרלי</span></div>
+    </div>
+
+    <div class="check-row" onclick="toggle(event,2)">
+      <input type="checkbox" id="c2">
+      <label for="c2">סיימתי את המשימה הזו ✅</label>
+    </div>
+  </section>
+
+  <!-- TASK 3 -->
+  <section class="task t3" data-task="3">
+    <div class="task-head">
+      <div class="num">3</div>
+      <div>
+        <div class="task-title">מודל כלכלי מעודכן מול נעה (שותפות לטווח הארוך)</div>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="label goal">🎯 מטרה</span>
+      <div class="text">שרלי חושבת שנכון לעסק להיכנס לשותפות עם נעה בטווח הארוך, ולכן צריך לחשוב על מודל כלכלי מעודכן מול נעה שיתאים לכולם.</div>
+    </div>
+
+    <div class="field">
+      <span class="label what">🛠️ מה לעשות</span>
+      <div class="text">
+        <ul>
+          <li>לעבור על ההודעות שנעה שלחה בווצאפ + על המייל ששלחה.</li>
+          <li>להבין איזה מודל כלכלי מעודכן אנחנו יכולים להסכים איתו מול נעה (בהתחשב גם במצב החדש של העסק).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="field">
+      <span class="label when">⏰ למתי</span>
+      <div class="text"><span class="when-pill">לפגישה עם שרלי</span></div>
+    </div>
+
+    <div class="check-row" onclick="toggle(event,3)">
+      <input type="checkbox" id="c3">
+      <label for="c3">סיימתי את המשימה הזו ✅</label>
+    </div>
+  </section>
+
+  <div class="controls">
+    <button class="btn" id="focusBtn" onclick="cycleFocus()">🎯 מצב מיקוד</button>
+    <button class="btn ghost" onclick="resetAll()">🔄 איפוס</button>
+    <button class="btn ghost" onclick="window.print()">🖨️ הדפסה / PDF</button>
+  </div>
+
+  <footer>
+    כל הכבוד שאתה כאן 💪 — אין צורך לעשות הכול בבת אחת. משימה אחת, נשימה אחת.
+  </footer>
+
+</div>
+
+<script>
+  const total = 3;
+  const cheers = [
+    "התחלה מצוינת! המשך כך 🌱",
+    "וואו, חצי דרך! אתה אלוף 🔥",
+    "כמעט שם — נשארה משימה אחת! 💫",
+    "סיימת הכול! גאווה ענקית 🎉🏆"
+  ];
+
+  function updateProgress(){
+    let done=0;
+    for(let i=1;i<=total;i++){
+      const cb=document.getElementById('c'+i);
+      const card=document.querySelector('[data-task="'+i+'"]');
+      if(cb.checked){done++;card.classList.add('done');}
+      else{card.classList.remove('done');}
+    }
+    const pct=Math.round(done/total*100);
+    document.getElementById('pct').textContent=pct+'%';
+    document.getElementById('barFill').style.width=pct+'%';
+    document.getElementById('cheer').textContent =
+      done===0 ? "בוא נתחיל — בחר משימה אחת והתמקד בה 🚀" : cheers[done-1];
+    saveState();
+  }
+
+  function toggle(e,i){
+    // avoid double-toggle when clicking the checkbox itself
+    if(e.target.tagName!=='INPUT'){
+      const cb=document.getElementById('c'+i);
+      cb.checked=!cb.checked;
+    }
+    updateProgress();
+  }
+
+  // Focus mode: cycle through tasks one at a time
+  let focusIndex=0; // 0 = off
+  function cycleFocus(){
+    const tasks=document.querySelectorAll('.task');
+    tasks.forEach(t=>t.classList.remove('active'));
+    focusIndex++;
+    if(focusIndex>total){
+      focusIndex=0;
+      document.body.classList.remove('focus');
+      document.getElementById('focusBtn').textContent='🎯 מצב מיקוד';
+      return;
+    }
+    document.body.classList.add('focus');
+    const active=document.querySelector('[data-task="'+focusIndex+'"]');
+    active.classList.add('active');
+    active.scrollIntoView({behavior:'smooth',block:'center'});
+    document.getElementById('focusBtn').textContent='⏭️ משימה הבאה ('+focusIndex+'/'+total+')';
+  }
+
+  function resetAll(){
+    for(let i=1;i<=total;i++){document.getElementById('c'+i).checked=false;}
+    focusIndex=0;
+    document.body.classList.remove('focus');
+    document.getElementById('focusBtn').textContent='🎯 מצב מיקוד';
+    document.querySelectorAll('.task').forEach(t=>t.classList.remove('active'));
+    updateProgress();
+  }
+
+  function saveState(){
+    try{
+      const s=[];
+      for(let i=1;i<=total;i++){s.push(document.getElementById('c'+i).checked);}
+      localStorage.setItem('aviv-tasks',JSON.stringify(s));
+    }catch(e){}
+  }
+  function loadState(){
+    try{
+      const s=JSON.parse(localStorage.getItem('aviv-tasks')||'[]');
+      s.forEach((v,idx)=>{const cb=document.getElementById('c'+(idx+1));if(cb)cb.checked=v;});
+    }catch(e){}
+    updateProgress();
+  }
+
+  loadState();
+</script>
+</body>
+</html>
